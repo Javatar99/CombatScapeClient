@@ -559,7 +559,7 @@ public class client extends RSApplet {
 			worldController.initToNull();
 			System.gc();
 			for(int i = 0; i < 4; i++)
-				aClass11Array1230[i].method210();
+				collisionDetection[i].method210();
 
 			for(int l = 0; l < 4; l++)
 			{
@@ -585,7 +585,7 @@ public class client extends RSApplet {
 					if (FileOperations.FileExists(signlink.findcachedir()+"maps/"+ terrianIndices[i3]+".dat"))
 						abyte0 = FileOperations.ReadFile(signlink.findcachedir()+"maps/"+ terrianIndices[i3]+".dat");
 					if(abyte0 != null)
-						objectManager.method180(abyte0, k5, i4, (anInt1069 - 6) * 8, (anInt1070 - 6) * 8, aClass11Array1230);
+						objectManager.method180(abyte0, k5, i4, (anInt1069 - 6) * 8, (anInt1070 - 6) * 8, collisionDetection);
 				}
 
 				for(int j4 = 0; j4 < k2; j4++)
@@ -612,7 +612,7 @@ public class client extends RSApplet {
 					{
 						int l8 = (regionIds[i6] >> 8) * 64 - baseX;
 						int k9 = (regionIds[i6] & 0xff) * 64 - baseY;
-						objectManager.method190(l8, aClass11Array1230, k9, worldController, abyte1);
+						objectManager.method190(l8, collisionDetection, k9, worldController, abyte1);
 					}
 				}
 
@@ -637,7 +637,7 @@ public class client extends RSApplet {
 								{
 									if(regionIds[l11] != j11 || terrianData[l11] == null)
 										continue;
-									objectManager.method179(i9, l9, aClass11Array1230, k4 * 8, (j10 & 7) * 8, terrianData[l11], (l10 & 7) * 8, j3, j6 * 8);
+									objectManager.method179(i9, l9, collisionDetection, k4 * 8, (j10 & 7) * 8, terrianData[l11], (l10 & 7) * 8, j3, j6 * 8);
 									break;
 								}
 
@@ -678,11 +678,11 @@ public class client extends RSApplet {
 								{
 									if(regionIds[k12] != j12 || objectData[k12] == null)
 										continue;
-									//objectManager.method183(aClass11Array1230, worldController, k10, j8 * 8, (i12 & 7) * 8, l6, objectData[k12], (k11 & 7) * 8, i11, j9 * 8);
+									//objectManager.method183(collisionDetection, worldController, k10, j8 * 8, (i12 & 7) * 8, l6, objectData[k12], (k11 & 7) * 8, i11, j9 * 8);
 									byte abyte0[] = objectData[k12];
                                     if (FileOperations.FileExists(signlink.findcachedir()+"maps/"+ terrianIndices[k12]+".dat"))
 										abyte0 = FileOperations.ReadFile(signlink.findcachedir()+"maps/"+ terrianIndices[k12]+".dat");
-                                    objectManager.method183(aClass11Array1230, worldController, k10, j8 * 8, (i12 & 7) * 8, l6, objectData[k12], (k11 & 7) * 8, i11, j9 * 8);
+                                    objectManager.method183(collisionDetection, worldController, k10, j8 * 8, (i12 & 7) * 8, l6, objectData[k12], (k11 & 7) * 8, i11, j9 * 8);
 									break;
 								}
 
@@ -695,7 +695,7 @@ public class client extends RSApplet {
 
 			}
 			stream.createFrame(0);
-			objectManager.method171(aClass11Array1230, worldController);
+			objectManager.method171(collisionDetection, worldController);
 			aRSImageProducer_1165.initDrawingArea();
 			stream.createFrame(0);
 			int k3 = ObjectManager.anInt145;
@@ -837,7 +837,7 @@ public class client extends RSApplet {
 						{
 							byte byte0 = 104;
 							byte byte1 = 104;
-							int ai1[][] = aClass11Array1230[plane].anIntArrayArray294;
+							int ai1[][] = collisionDetection[plane].anIntArrayArray294;
 							for(int i4 = 0; i4 < 10; i4++)
 							{
 								int j4 = (int)(Math.random() * 4D);
@@ -2197,7 +2197,7 @@ public class client extends RSApplet {
 		unlinkMRUNodes();
 		worldController.initToNull();
 		for(int i = 0; i < 4; i++)
-			aClass11Array1230[i].method210();
+			collisionDetection[i].method210();
 		System.gc();
 		stopMidi();
 		currentSong = -1;
@@ -4893,7 +4893,7 @@ public class client extends RSApplet {
 		intGroundArray = null;
 		byteGroundArray = null;
 		worldController = null;
-		aClass11Array1230 = null;
+		collisionDetection = null;
 		anIntArrayArray901 = null;
 		anIntArrayArray825 = null;
 		bigX = null;
@@ -5172,7 +5172,7 @@ public class client extends RSApplet {
 							for(int k1 = 0; k1 < 4; k1++) {
 								for(int i2 = 1; i2 < 103; i2++) {
 									for(int k2 = 1; k2 < 103; k2++)
-										aClass11Array1230[k1].anIntArrayArray294[i2][k2] = 0;
+										collisionDetection[k1].anIntArrayArray294[i2][k2] = 0;
 
 								}
 							}
@@ -6630,7 +6630,7 @@ public class client extends RSApplet {
 		bigY[l3++] = j1;
 		boolean flag1 = false;
 		int j4 = bigX.length;
-		int ai[][] = aClass11Array1230[plane].anIntArrayArray294;
+		int ai[][] = collisionDetection[plane].anIntArrayArray294;
 		while(i4 != l3) 
 		{
 			j3 = bigX[i4];
@@ -6643,18 +6643,18 @@ public class client extends RSApplet {
 			}
 			if(i1 != 0)
 			{
-				if((i1 < 5 || i1 == 10) && aClass11Array1230[plane].method219(k2, j3, k3, j, i1 - 1, i2))
+				if((i1 < 5 || i1 == 10) && collisionDetection[plane].method219(k2, j3, k3, j, i1 - 1, i2))
 				{
 					flag1 = true;
 					break;
 				}
-				if(i1 < 10 && aClass11Array1230[plane].method220(k2, i2, k3, i1 - 1, j, j3))
+				if(i1 < 10 && collisionDetection[plane].method220(k2, i2, k3, i1 - 1, j, j3))
 				{
 					flag1 = true;
 					break;
 				}
 			}
-			if(k1 != 0 && k != 0 && aClass11Array1230[plane].method221(i2, k2, j3, k, l1, k1, k3))
+			if(k1 != 0 && k != 0 && collisionDetection[plane].method221(i2, k2, j3, k, l1, k1, k3))
 			{
 				flag1 = true;
 				break;
@@ -7301,7 +7301,7 @@ public class client extends RSApplet {
 			intGroundArray = new int[4][105][105];
 			worldController = new WorldController(intGroundArray);
 			for(int j = 0; j < 4; j++)
-				aClass11Array1230[j] = new CollisionDetection();
+				collisionDetection[j] = new CollisionDetection();
 
 			aClass30_Sub2_Sub1_Sub1_1263 = new Sprite(512, 512);
 			StreamLoader streamLoader_6 = streamLoaderForName(5, "update list", "versionlist", expectedCRCs[5], 60);
@@ -10724,7 +10724,7 @@ public class client extends RSApplet {
 					worldController.method291(i1, j, i, (byte)-119);
 					ObjectDef class46 = ObjectDef.forID(j2);
 					if(class46.aBoolean767)
-						aClass11Array1230[j].method215(l2, k2, class46.aBoolean757, i1, i);
+						collisionDetection[j].method215(l2, k2, class46.aBoolean757, i1, i);
 				}
 				if(j1 == 1)
 					worldController.method292(i, j, i1);
@@ -10735,14 +10735,14 @@ public class client extends RSApplet {
 					if(i1 + class46_1.anInt744 > 103 || i + class46_1.anInt744 > 103 || i1 + class46_1.anInt761 > 103 || i + class46_1.anInt761 > 103)
 						return;
 					if(class46_1.aBoolean767)
-						aClass11Array1230[j].method216(l2, class46_1.anInt744, i1, i, class46_1.anInt761, class46_1.aBoolean757);
+						collisionDetection[j].method216(l2, class46_1.anInt744, i1, i, class46_1.anInt761, class46_1.aBoolean757);
 				}
 				if(j1 == 3)
 				{
 					worldController.method294(j, i, i1);
 					ObjectDef class46_2 = ObjectDef.forID(j2);
 					if(class46_2.aBoolean767 && class46_2.hasActions)
-						aClass11Array1230[j].method218(i, i1);
+						collisionDetection[j].method218(i, i1);
 				}
 			}
 			if(k1 >= 0)
@@ -10750,7 +10750,7 @@ public class client extends RSApplet {
 				int j3 = j;
 				if(j3 < 3 && (byteGroundArray[1][i1][i] & 2) == 2)
 					j3++;
-				ObjectManager.method188(worldController, k, i, l, j3, aClass11Array1230[j], intGroundArray, i1, k1, j);
+				ObjectManager.method188(worldController, k, i, l, j3, collisionDetection[j], intGroundArray, i1, k1, j);
 			}
 		}
 	}
@@ -12247,7 +12247,7 @@ public class client extends RSApplet {
 		inputTaken = false;
 		songChanging = true;
 		anIntArray1229 = new int[151];
-		aClass11Array1230 = new CollisionDetection[4];
+		collisionDetection = new CollisionDetection[4];
 		aBoolean1233 = false;
 		anIntArray1240 = new int[100];
 		anIntArray1241 = new int[50];
@@ -12662,7 +12662,7 @@ public class client extends RSApplet {
 	private int nextSong;
 	private boolean songChanging;
 	private final int[] anIntArray1229;
-	private CollisionDetection[] aClass11Array1230;
+	private CollisionDetection[] collisionDetection;
 	public static int anIntArray1232[];
 	private boolean aBoolean1233;
 	private int[] regionIds;
