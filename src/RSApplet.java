@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.applet.Applet;
 import java.awt.*;
 import java.awt.event.*;
@@ -176,7 +177,7 @@ public class RSApplet extends Applet implements Runnable, MouseListener, MouseMo
         clickX = i;
         clickY = j;
         clickTime = System.currentTimeMillis();
-        if (mouseevent.isMetaDown()) {
+        if (SwingUtilities.isRightMouseButton(mouseevent)) {
             clickMode1 = 2;
             clickMode2 = 2;
         } else {
