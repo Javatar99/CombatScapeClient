@@ -12,6 +12,21 @@ final class Decompressor {
 		indexFile = randomaccessfile1;
 	}
 
+	/**
+	 * Returns the number of files in the cache index.
+	 * @return
+	 */
+	public long getFileCount() {
+		try {
+			if (indexFile != null) {
+				return (indexFile.length() / 6);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
 	public synchronized byte[] decompress(int i) {
 		try {
 			seekTo(indexFile, i * 6);

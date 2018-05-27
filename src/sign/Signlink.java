@@ -4,7 +4,7 @@ import java.applet.Applet;
 import java.io.*;
 import java.net.*;
 
-public final class signlink implements Runnable {
+public final class Signlink implements Runnable {
 
     public static void startpriv(InetAddress inetaddress) {
         threadliveid = (int)(Math.random() * 99999999D);
@@ -21,7 +21,7 @@ public final class signlink implements Runnable {
         savereq = null;
         urlreq = null;
         socketip = inetaddress;
-        Thread thread = new Thread(new signlink());
+        Thread thread = new Thread(new Signlink());
         thread.setDaemon(true);
         thread.start();
         while(!active)
@@ -133,7 +133,7 @@ public final class signlink implements Runnable {
             "C:/", "D:", "E:",
             "/tmp/", "/"
         };
-        String subfolder = "CleanPICache/";
+        String subfolder = "CombatScapeCache/";
         for(String folder : possibleFolders)
             if(new File(folder).exists()) {
                 if(new File(folder + subfolder).exists()
@@ -241,7 +241,7 @@ public final class signlink implements Runnable {
         System.out.println("Error: " + s);
     }
 
-    private signlink() {
+    private Signlink() {
 	
     }
 

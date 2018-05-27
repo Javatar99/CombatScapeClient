@@ -1,10 +1,10 @@
-import sign.signlink;
+import sign.Signlink;
+
 import java.net.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
-import javax.swing.plaf.metal.MetalLookAndFeel;
 
 
 public class Jframe extends client implements ActionListener {
@@ -15,7 +15,7 @@ public class Jframe extends client implements ActionListener {
 	public Jframe(String args[]) {
 		super();
 		try {
-			sign.signlink.startpriv(InetAddress.getByName(server));
+			Signlink.startpriv(InetAddress.getByName(server));
 			initUI();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -26,7 +26,7 @@ public class Jframe extends client implements ActionListener {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			JPopupMenu.setDefaultLightWeightPopupEnabled(false);
-			frame = new JFrame("Project Insanity");
+			frame = new JFrame("Combat Scape");
 			frame.setLayout(new BorderLayout());
 			frame.setResizable(false);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,7 +36,7 @@ public class Jframe extends client implements ActionListener {
 			gamePanel.add(this);
 			gamePanel.setPreferredSize(new Dimension(765, 503));
 
-			JMenu fileMenu = new JMenu("Project Insanity");
+			JMenu fileMenu = new JMenu("Combat Scape");
 
 			String[] mainButtons = new String[] { "Remember to vote!", "-", "Exit" };
 
@@ -103,8 +103,8 @@ public class Jframe extends client implements ActionListener {
 				if (cmd.equalsIgnoreCase("exit")) {
 					System.exit(0);
 				}
-				if (cmd.equalsIgnoreCase("Project-Insanity.net")) {
-					openUpWebSite("http://www.project-insanity.net/");
+				if (cmd.equalsIgnoreCase("Combat-Scape.net")) {
+					openUpWebSite("http://www.Combat-Scape.net/");
 				}	
 			}
 		} catch (Exception e) {

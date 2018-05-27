@@ -2,7 +2,7 @@
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-import sign.signlink;
+import sign.Signlink;
 
 final class NodeCache {
 
@@ -46,7 +46,7 @@ final class NodeCache {
         }
         catch(RuntimeException runtimeexception)
         {
-            signlink.reporterror("91499, " + node + ", " + l + ", " + (byte)7 + ", " + runtimeexception.toString());
+            Signlink.reporterror("91499, " + node + ", " + l + ", " + (byte)7 + ", " + runtimeexception.toString());
         }
         throw new RuntimeException();
     }

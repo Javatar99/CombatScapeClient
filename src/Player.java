@@ -87,7 +87,6 @@ public final class Player extends Entity {
 		anInt1702 = stream.readUnsignedByte();
 		headIcon = stream.readUnsignedByte();
 		skullIcon = stream.readUnsignedByte();
-		//hintIcon = stream.readUnsignedByte();
 		desc = null;
 		team = 0;
 		for(int j = 0; j < 12; j++)

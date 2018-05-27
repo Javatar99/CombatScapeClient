@@ -3,7 +3,8 @@
 // Decompiler options: packimports(3) 
 
 import java.math.BigInteger;
-import sign.signlink;
+
+import sign.Signlink;
 
 public final class Stream extends NodeSub {
 
@@ -38,7 +39,7 @@ public final class Stream extends NodeSub {
 		buffer[currentOffset++] = (byte)(i + encryption.getNextKey());
 	}
 
-	public void writeWordBigEndian(int i) {
+	public void writeByte(int i) {
 		buffer[currentOffset++] = (byte)i;
 	}
 
@@ -83,7 +84,7 @@ public final class Stream extends NodeSub {
 			buffer[currentOffset++] = (byte)(int)(l >> 8);
 			buffer[currentOffset++] = (byte)(int)l;
 		} catch(RuntimeException runtimeexception) {
-			signlink.reporterror("14395, " + 5 + ", " + l + ", " + runtimeexception.toString());
+			Signlink.reporterror("14395, " + 5 + ", " + l + ", " + runtimeexception.toString());
 			throw new RuntimeException();
 		}
 	}
@@ -210,7 +211,7 @@ public final class Stream extends NodeSub {
 		BigInteger biginteger3 = biginteger2/*.modPow(biginteger, biginteger1)*/;
 		byte abyte1[] = biginteger3.toByteArray();
 		currentOffset = 0;
-		writeWordBigEndian(abyte1.length);
+		writeByte(abyte1.length);
 		writeBytes(abyte1, abyte1.length, 0);
 	}
 

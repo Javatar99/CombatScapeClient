@@ -2,12 +2,8 @@
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-import sign.signlink;
 import java.awt.*;
 import java.awt.image.PixelGrabber;
-import java.awt.image.*;
-import javax.imageio.*;
-import java.io.*;
 import javax.swing.ImageIcon;
 
 public final class Sprite extends DrawingArea {

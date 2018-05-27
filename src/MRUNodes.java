@@ -2,7 +2,7 @@
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-import sign.signlink;
+import sign.Signlink;
 
 public final class MRUNodes {
 
@@ -50,7 +50,7 @@ public final class MRUNodes {
         }
         catch(RuntimeException runtimeexception)
         {
-            signlink.reporterror("47547, " + nodeSub + ", " + l + ", " + (byte)2 + ", " + runtimeexception.toString());
+            Signlink.reporterror("47547, " + nodeSub + ", " + l + ", " + (byte)2 + ", " + runtimeexception.toString());
         }
         throw new RuntimeException();
     }
