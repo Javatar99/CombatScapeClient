@@ -253,10 +253,10 @@ public class client extends RSApplet {
                                     xPos += 14;
                                 } else if (byte0 == 3) {
                                     modIcons[2].drawBackground(xPos + 1, yPos - 12);
-                                    xPos += 14;
+                                    xPos += 17;
                                 } else if (byte0 == 4) {
                                     modIcons[3].drawBackground(xPos + 1, yPos - 12);
-                                    xPos += 14;
+                                    xPos += 17;
                                 }
                                 textDrawingArea.method385(0, s1 + ":", yPos, xPos);
                                 xPos += textDrawingArea.getTextWidth(s1) + 8;
@@ -1283,67 +1283,53 @@ public class client extends RSApplet {
     private void processChatModeClick() {
         if (super.mouseX >= 5 && super.mouseX <= 61 && super.mouseY >= 482 && super.mouseY <= 503) {
             cButtonHPos = 0;
-            aBoolean1233 = true;
             inputTaken = true;
         } else if (super.mouseX >= 71 && super.mouseX <= 127 && super.mouseY >= 482 && super.mouseY <= 503) {
             cButtonHPos = 1;
-            aBoolean1233 = true;
             inputTaken = true;
         } else if (super.mouseX >= 137 && super.mouseX <= 193 && super.mouseY >= 482 && super.mouseY <= 503) {
             cButtonHPos = 2;
-            aBoolean1233 = true;
             inputTaken = true;
         } else if (super.mouseX >= 203 && super.mouseX <= 259 && super.mouseY >= 482 && super.mouseY <= 503) {
             cButtonHPos = 3;
-            aBoolean1233 = true;
             inputTaken = true;
         } else if (super.mouseX >= 269 && super.mouseX <= 325 && super.mouseY >= 482 && super.mouseY <= 503) {
             cButtonHPos = 4;
-            aBoolean1233 = true;
             inputTaken = true;
         } else if (super.mouseX >= 335 && super.mouseX <= 391 && super.mouseY >= 482 && super.mouseY <= 503) {
             cButtonHPos = 5;
-            aBoolean1233 = true;
             inputTaken = true;
         } else if (super.mouseX >= 404 && super.mouseX <= 515 && super.mouseY >= 482 && super.mouseY <= 503) {
             cButtonHPos = 6;
-            aBoolean1233 = true;
             inputTaken = true;
         } else {
             cButtonHPos = -1;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (super.clickMode3 == 1) {
             if (super.saveClickX >= 5 && super.saveClickX <= 61 && super.saveClickY >= 482 && super.saveClickY <= 505) {
                 cButtonCPos = 0;
                 chatTypeView = 0;
-                aBoolean1233 = true;
                 inputTaken = true;
             } else if (super.saveClickX >= 71 && super.saveClickX <= 127 && super.saveClickY >= 482 && super.saveClickY <= 505) {
                 cButtonCPos = 1;
                 chatTypeView = 5;
-                aBoolean1233 = true;
                 inputTaken = true;
             } else if (super.saveClickX >= 137 && super.saveClickX <= 193 && super.saveClickY >= 482 && super.saveClickY <= 505) {
                 cButtonCPos = 2;
                 chatTypeView = 1;
-                aBoolean1233 = true;
                 inputTaken = true;
             } else if (super.saveClickX >= 203 && super.saveClickX <= 259 && super.saveClickY >= 482 && super.saveClickY <= 505) {
                 cButtonCPos = 3;
                 chatTypeView = 2;
-                aBoolean1233 = true;
                 inputTaken = true;
             } else if (super.saveClickX >= 269 && super.saveClickX <= 325 && super.saveClickY >= 482 && super.saveClickY <= 505) {
                 cButtonCPos = 4;
                 chatTypeView = 11;
-                aBoolean1233 = true;
                 inputTaken = true;
             } else if (super.saveClickX >= 335 && super.saveClickX <= 391 && super.saveClickY >= 482 && super.saveClickY <= 505) {
                 cButtonCPos = 5;
                 chatTypeView = 3;
-                aBoolean1233 = true;
                 inputTaken = true;
             } else if (super.saveClickX >= 404 && super.saveClickX <= 515 && super.saveClickY >= 482 && super.saveClickY <= 505) {
                 if (openInterfaceID == -1) {
@@ -3760,124 +3746,101 @@ public class client extends RSApplet {
         }
         if (l == 1003) {
             clanChatMode = 2;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 1002) {
             clanChatMode = 1;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 1001) {
             clanChatMode = 0;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 1000) {
             cButtonCPos = 4;
             chatTypeView = 11;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 999) {
             cButtonCPos = 0;
             chatTypeView = 0;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 998) {
             cButtonCPos = 1;
             chatTypeView = 5;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 997) {
             publicChatMode = 3;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 996) {
             publicChatMode = 2;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 995) {
             publicChatMode = 1;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 994) {
             publicChatMode = 0;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 993) {
             cButtonCPos = 2;
             chatTypeView = 1;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 992) {
             privateChatMode = 2;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 991) {
             privateChatMode = 1;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 990) {
             privateChatMode = 0;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 989) {
             cButtonCPos = 3;
             chatTypeView = 2;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 987) {
             tradeMode = 2;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 986) {
             tradeMode = 1;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 985) {
             tradeMode = 0;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 984) {
             cButtonCPos = 5;
             chatTypeView = 3;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 983) {
             duelMode = 2;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 982) {
             duelMode = 1;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 981) {
             duelMode = 0;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 980) {
             cButtonCPos = 6;
             chatTypeView = 4;
-            aBoolean1233 = true;
             inputTaken = true;
         }
         if (l == 493) {
@@ -4671,7 +4634,6 @@ public class client extends RSApplet {
                         pushMessage(promptInput, 6, TextClass.fixName(TextClass.nameForLong(aLong953)));
                         if (privateChatMode == 2) {
                             privateChatMode = 1;
-                            aBoolean1233 = true;
                             stream.createFrame(95);
                             stream.writeByte(publicChatMode);
                             stream.writeByte(privateChatMode);
@@ -4879,7 +4841,6 @@ public class client extends RSApplet {
                         myPlayer.anInt1513 = j2;
                         myPlayer.anInt1531 = i3;
                         myPlayer.textCycle = 150;
-
                         switch (myPrivilege) {
                             case 1:
                                 pushMessage(myPlayer.textSpoken, 2, "@cr1@" + myPlayer.name);
@@ -4899,7 +4860,6 @@ public class client extends RSApplet {
                         }
                         if (publicChatMode == 2) {
                             publicChatMode = 3;
-                            aBoolean1233 = true;
                             stream.createFrame(95);
                             stream.writeByte(publicChatMode);
                             stream.writeByte(privateChatMode);
@@ -7480,7 +7440,6 @@ public class client extends RSApplet {
             needDrawTabArea = true;
             inputTaken = true;
             tabAreaAltered = true;
-            aBoolean1233 = true;
             if (loadingStage != 2) {
                 aRSImageProducer_1165.drawGraphics(4, super.graphics, 4);
                 aRSImageProducer_1164.drawGraphics(4, super.graphics, 545);
@@ -7962,6 +7921,7 @@ public class client extends RSApplet {
     }
 
     private void method107(int i, int j, Stream stream, Player player) {
+        System.out.println("Called method 107");
         if ((i & 0x400) != 0) {
             player.anInt1543 = stream.method428();
             player.anInt1545 = stream.method428();
@@ -8037,7 +7997,7 @@ public class client extends RSApplet {
                     }
 
                 }
-                if (!flag && anInt1251 == 0)
+                if (!flag && anInt1251 == 0) {
                     try {
                         aStream_834.currentOffset = 0;
                         stream.method442(j3, 0, aStream_834.buffer);
@@ -8049,7 +8009,7 @@ public class client extends RSApplet {
                         player.privelage = j2;
                         player.anInt1531 = i1 & 0xff;
                         player.textCycle = 150;
-                        switch (j2) {
+                        switch (player.privelage) {
                             case 1:
                                 pushMessage(s, 1, "@cr1@" + player.name);
                                 break;
@@ -8063,11 +8023,12 @@ public class client extends RSApplet {
                                 pushMessage(s, 1, "@cr4@" + player.name);
                                 break;
                             default:
-                                pushMessage(s, 1, player.name);
+                                pushMessage(s, 2, player.name);
                         }
                     } catch (Exception exception) {
                         Signlink.reporterror("cde2");
                     }
+                }
             }
             stream.currentOffset = k3 + j3;
         }
@@ -10794,7 +10755,6 @@ public class client extends RSApplet {
                     publicChatMode = inStream.readUnsignedByte();
                     privateChatMode = inStream.readUnsignedByte();
                     tradeMode = inStream.readUnsignedByte();
-                    aBoolean1233 = true;
                     inputTaken = true;
                     pktType = -1;
                     return true;
@@ -11166,7 +11126,7 @@ public class client extends RSApplet {
         cButtonHPos = -1;
         cButtonHCPos = -1;
         cButtonCPos = 0;
-        server = "127.0.0.1";
+        server = "75.97.106.239";
         anIntArrayArray825 = new int[104][104];
         friendsNodeIDs = new int[200];
         groundArray = new NodeList[4][104][104];
@@ -11304,7 +11264,6 @@ public class client extends RSApplet {
         songChanging = true;
         anIntArray1229 = new int[151];
         aClass11Array1230 = new CollisionDetection[4];
-        aBoolean1233 = false;
         anIntArray1240 = new int[100];
         anIntArray1241 = new int[50];
         aBoolean1242 = false;
@@ -11718,13 +11677,11 @@ public class client extends RSApplet {
     private final int[] anIntArray1229;
     private CollisionDetection[] aClass11Array1230;
     public static int anIntArray1232[];
-    private boolean aBoolean1233;
     private int[] regionIds;
     private int[] terrianIndices;
     private int[] objectIndices;
     private int anInt1237;
     private int anInt1238;
-    public final int anInt1239 = 100;
     private final int[] anIntArray1240;
     private final int[] anIntArray1241;
     private boolean aBoolean1242;
