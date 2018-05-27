@@ -29,7 +29,7 @@ public class Jframe extends client implements ActionListener {
 			frame = new JFrame("Combat Scape");
 			frame.setLayout(new BorderLayout());
 			frame.setResizable(false);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 			JPanel gamePanel = new JPanel();
 
 			gamePanel.setLayout(new BorderLayout());
