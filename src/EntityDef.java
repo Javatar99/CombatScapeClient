@@ -29,16 +29,32 @@ public final class EntityDef {
         entityDef.readValues(stream);
 
         switch (i){
-
             case 1784:
                 entityDef.name = "Niels";
                 entityDef.description = "A Good friend of Javatars'".getBytes();
                 entityDef.actions = new String[]{"Ranged Store", null, "Weapon Store", "Food Store", "Potion Store"};
                 break;
-
+            case 225:
+                EntityDef blackTitan = forID(221);
+                copyArray(blackTitan, entityDef);
+                entityDef.name = "Night The Titan";
+                entityDef.description = "The Mighty Nighty".getBytes();
+                entityDef.actions = new String[]{"Armour Store", null, "Jewelry Store", "Pure Store", null};
+                entityDef.walkAnim = blackTitan.walkAnim;
+                entityDef.standAnim = blackTitan.standAnim;
+                break;
         }
 
         return entityDef;
+    }
+
+    private static void copyArray(EntityDef copying, EntityDef copyTo){
+        copyTo.originalModelColors = new int[copying.originalModelColors.length];
+        copyTo.modifiedModelColors = new int[copying.modifiedModelColors.length];
+        copyTo.models = new int[copying.models.length];
+        System.arraycopy(copying.originalModelColors, 0, copyTo.originalModelColors, 0, copying.originalModelColors.length);
+        System.arraycopy(copying.modifiedModelColors, 0, copyTo.modifiedModelColors, 0, copying.modifiedModelColors.length);
+        System.arraycopy(copying.models, 0, copyTo.models, 0, copying.models.length);
     }
 
     public static int totalNPCs;

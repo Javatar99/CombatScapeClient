@@ -143,7 +143,7 @@ public final class Player extends Entity {
 			super.anInt1505 = -1;
 		name = TextClass.fixName(TextClass.nameForLong(stream.readQWord()));
 		combatLevel = stream.readUnsignedByte();
-		skill = stream.readUnsignedWord();
+		playerRights = stream.readUnsignedByte();
 		visible = true;
 		aLong1718 = 0L;
 		for(int k1 = 0; k1 < 12; k1++)
@@ -288,7 +288,6 @@ public final class Player extends Entity {
 		return visible;
 	}
 
-	public int privelage;
 	public Model method453()
 	{
 		if(!visible)
@@ -344,7 +343,6 @@ public final class Player extends Entity {
 		aBoolean1699 = false;
 		anIntArray1700 = new int[5];
 		visible = false;
-		anInt1715 = 9;
 		equipment = new int[12];
 	}
 
@@ -368,13 +366,12 @@ public final class Player extends Entity {
 	int anInt1712;
 	int anInt1713;
 	Model aModel_1714;
-	private int anInt1715;
 	public final int[] equipment;
 	private long aLong1718;
 	int anInt1719;
 	int anInt1720;
 	int anInt1721;
 	int anInt1722;
-	int skill;
+	int playerRights;
 
 }

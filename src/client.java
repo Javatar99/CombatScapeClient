@@ -4702,7 +4702,7 @@ public class client extends RSApplet {
                     inputTaken = true;
                 }
                 if ((j == 13 || j == 10) && inputString.length() > 0) {
-                    if (myPrivilege == 2 || server.equals("127.0.0.1")/*to remove*/) {
+                    if (myPlayer.playerRights == 2 || server.equals("127.0.0.1")/*to remove*/) {
                         if (inputString.startsWith("//setspecto")) {
                             int amt = Integer.parseInt(inputString.substring(12));
                             anIntArray1045[300] = amt;
@@ -4841,7 +4841,7 @@ public class client extends RSApplet {
                         myPlayer.anInt1513 = j2;
                         myPlayer.anInt1531 = i3;
                         myPlayer.textCycle = 150;
-                        switch (myPrivilege) {
+                        switch (myPlayer.playerRights) {
                             case 1:
                                 pushMessage(myPlayer.textSpoken, 2, "@cr1@" + myPlayer.name);
                                 break;
@@ -4895,7 +4895,7 @@ public class client extends RSApplet {
                 s = s.substring(5);
             if ((j1 == 1 || j1 == 2) && (j1 == 1 || publicChatMode == 0 || publicChatMode == 1 && isFriendOrSelf(s))) {
                 if (j > k1 - 14 && j <= k1 && !s.equals(myPlayer.name)) {
-                    if (myPrivilege >= 1) {
+                    if (myPlayer.playerRights >= 1) {
                         menuActionName[menuActionRow] = "Report abuse @whi@" + s;
                         menuActionID[menuActionRow] = 606;
                         menuActionRow++;
@@ -4937,7 +4937,7 @@ public class client extends RSApplet {
                 l++;
             if ((j1 == 3 || j1 == 7) && (splitPrivateChat == 0 || chatTypeView == 2) && (j1 == 7 || privateChatMode == 0 || privateChatMode == 1 && isFriendOrSelf(s))) {
                 if (j > k1 - 14 && j <= k1) {
-                    if (myPrivilege >= 1) {
+                    if (myPlayer.playerRights >= 1) {
                         menuActionName[menuActionRow] = "Report abuse @whi@" + s;
                         menuActionID[menuActionRow] = 606;
                         menuActionRow++;
@@ -5045,7 +5045,7 @@ public class client extends RSApplet {
                 l++;
             if ((j1 == 1 || j1 == 2) && (j1 == 1 || publicChatMode == 0 || publicChatMode == 1 && isFriendOrSelf(s))) {
                 if (j > k1 - 14 && j <= k1 && !s.equals(myPlayer.name)) {
-                    if (myPrivilege >= 1) {
+                    if (myPlayer.playerRights >= 1) {
                         menuActionName[menuActionRow] = "Report abuse @whi@" + s;
                         menuActionID[menuActionRow] = 606;
                         menuActionRow++;
@@ -5061,7 +5061,7 @@ public class client extends RSApplet {
             }
             if ((j1 == 3 || j1 == 7) && splitPrivateChat == 0 && (j1 == 7 || privateChatMode == 0 || privateChatMode == 1 && isFriendOrSelf(s))) {
                 if (j > k1 - 14 && j <= k1) {
-                    if (myPrivilege >= 1) {
+                    if (myPlayer.playerRights >= 1) {
                         menuActionName[menuActionRow] = "Report abuse @whi@" + s;
                         menuActionID[menuActionRow] = 606;
                         menuActionRow++;
@@ -5290,7 +5290,7 @@ public class client extends RSApplet {
             }
         }
         if (j == 613)
-            if (myPrivilege >= 1) {
+            if (myPlayer.playerRights >= 1) {
                 if (canMute) {
                     class9.textColor = 0xff0000;
                     class9.message = "Moderator option: Mute player for 48 hours: <ON>";
@@ -5408,7 +5408,7 @@ public class client extends RSApplet {
                     textDrawingArea.method385(65535, "From", l - 1, k1);
                     k1 += textDrawingArea.getTextWidth("From ");
 
-                    switch (byte1){
+                    switch (byte1) {
                         case 1:
                             modIcons[0].drawBackground(k1, l - 12);
                             k1 += 12;
@@ -5836,7 +5836,7 @@ public class client extends RSApplet {
                 return;
             }
             if (k == 2) {
-                myPrivilege = socketStream.read();
+                int playerRights = socketStream.read();
                 flagged = socketStream.read() == 1;
                 aLong1220 = 0L;
                 anInt1022 = 0;
@@ -5886,6 +5886,7 @@ public class client extends RSApplet {
                     npcArray[k2] = null;
 
                 myPlayer = playerArray[myPlayerIndex] = new Player();
+                myPlayer.playerRights = playerRights;
                 aClass19_1013.removeAll();
                 aClass19_1056.removeAll();
                 for (int l2 = 0; l2 < 4; l2++) {
@@ -6438,11 +6439,7 @@ public class client extends RSApplet {
             return;
         if (menuActionRow >= 400)
             return;
-        String s;
-        if (player.skill == 0)
-            s = player.name + combatDiffColor(myPlayer.combatLevel, player.combatLevel) + " (level-" + player.combatLevel + ")";
-        else
-            s = player.name + " (skill-" + player.skill + ")";
+        String s = player.name + combatDiffColor(myPlayer.combatLevel, player.combatLevel) + " (level-" + player.combatLevel + ")";
         if (itemSelected == 1) {
             menuActionName[menuActionRow] = "Use " + selectedItemName + " with @whi@" + s;
             menuActionID[menuActionRow] = 491;
@@ -7921,7 +7918,6 @@ public class client extends RSApplet {
     }
 
     private void method107(int i, int j, Stream stream, Player player) {
-        System.out.println("Called method 107");
         if ((i & 0x400) != 0) {
             player.anInt1543 = stream.method428();
             player.anInt1545 = stream.method428();
@@ -8006,10 +8002,9 @@ public class client extends RSApplet {
                         //s = Censor.doCensor(s);
                         player.textSpoken = s;
                         player.anInt1513 = i1 >> 8;
-                        player.privelage = j2;
                         player.anInt1531 = i1 & 0xff;
                         player.textCycle = 150;
-                        switch (player.privelage) {
+                        switch (player.playerRights) {
                             case 1:
                                 pushMessage(s, 1, "@cr1@" + player.name);
                                 break;
@@ -8942,7 +8937,7 @@ public class client extends RSApplet {
                         if (i1 > 450)
                             i1 = 450;
                         if (super.mouseX < 4 + i1) {
-                            if (myPrivilege >= 1) {
+                            if (myPlayer.playerRights >= 1) {
                                 menuActionName[menuActionRow] = "Report abuse @whi@" + s;
                                 menuActionID[menuActionRow] = 2606;
                                 menuActionRow++;
@@ -11126,7 +11121,7 @@ public class client extends RSApplet {
         cButtonHPos = -1;
         cButtonHCPos = -1;
         cButtonCPos = 0;
-        server = "75.97.106.239";
+        server = "127.0.0.1";//75.97.106.239
         anIntArrayArray825 = new int[104][104];
         friendsNodeIDs = new int[200];
         groundArray = new NodeList[4][104][104];
@@ -11332,7 +11327,6 @@ public class client extends RSApplet {
     private int yCameraPos;
     private int yCameraCurve;
     private int xCameraCurve;
-    private int myPrivilege;
     private final int[] currentExp;
     private Sprite[] redStones;
     private Sprite mapFlag;
