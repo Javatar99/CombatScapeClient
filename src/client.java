@@ -743,12 +743,12 @@ public class client extends RSApplet {
         for (int l3 = k; l3 <= j1; l3++) {
             for (int j5 = i2; j5 <= l2; j5++)
                 if (l3 == k || l3 == j1 || j5 == i2 || j5 == l2) {
-                    int j7 = onDemandFetcher.method562(0, j5, l3);
-                    if (j7 != -1)
-                        onDemandFetcher.method560(j7, 3);
-                    int k8 = onDemandFetcher.method562(1, j5, l3);
-                    if (k8 != -1)
-                        onDemandFetcher.method560(k8, 3);
+                    int floorID = onDemandFetcher.getMapID(0, j5, l3);
+                    if (floorID != -1)
+                        onDemandFetcher.requestFile(floorID, 3);
+                    int objectID = onDemandFetcher.getMapID(1, j5, l3);
+                    if (objectID != -1)
+                        onDemandFetcher.requestFile(objectID, 3);
                 }
 
         }
@@ -2687,7 +2687,7 @@ public class client extends RSApplet {
                     }
 
                 }
-            } while (onDemandData.dataType != 93 || !onDemandFetcher.method564(onDemandData.ID));
+            } while (onDemandData.dataType != 93 || !onDemandFetcher.isObjectMap(onDemandData.ID));
             ObjectManager.method173(new Stream(onDemandData.buffer), onDemandFetcher);
         } while (true);
     }
@@ -3460,8 +3460,7 @@ public class client extends RSApplet {
                         inputTaken = true;
                         break;
                     default:
-                        stream.createFrame(185);
-                        stream.writeWord(k);
+                        sendButtonClick(class9);
                         break;
 
                 }
@@ -3885,9 +3884,8 @@ public class client extends RSApplet {
             stream.method432(anInt1137);
         }
         if (l == 646) {
-            stream.createFrame(185);
-            stream.writeWord(k);
             RSInterface class9_2 = RSInterface.interfaceCache[k];
+            sendButtonClick(class9_2);
             if (class9_2.valueIndexArray != null && class9_2.valueIndexArray[0][0] == 5) {
                 int i2 = class9_2.valueIndexArray[0][1];
                 if (variousSettings[i2] != class9_2.anIntArray212[0]) {
@@ -4201,9 +4199,8 @@ public class client extends RSApplet {
             pushMessage(s5, 0, "");
         }
         if (l == 169) {
-            stream.createFrame(185);
-            stream.writeWord(k);
             RSInterface class9_3 = RSInterface.interfaceCache[k];
+            sendButtonClick(class9_3);
             if (class9_3.valueIndexArray != null && class9_3.valueIndexArray[0][0] == 5) {
                 int l2 = class9_3.valueIndexArray[0][1];
                 variousSettings[l2] = 1 - variousSettings[l2];
@@ -6729,18 +6726,18 @@ public class client extends RSApplet {
             }
             if (decompressors[0] != null) {
                 drawLoadingText(75, "Requesting maps");
-                onDemandFetcher.method558(3, onDemandFetcher.method562(0, 48, 47));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(1, 48, 47));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(0, 48, 48));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(1, 48, 48));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(0, 48, 49));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(1, 48, 49));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(0, 47, 47));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(1, 47, 47));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(0, 47, 48));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(1, 47, 48));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(0, 148, 48));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(1, 148, 48));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapID(0, 48, 47));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapID(1, 48, 47));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapID(0, 48, 48));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapID(1, 48, 48));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapID(0, 48, 49));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapID(1, 48, 49));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapID(0, 47, 47));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapID(1, 47, 47));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapID(0, 47, 48));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapID(1, 47, 48));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapID(0, 148, 48));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapID(1, 148, 48));
                 k = onDemandFetcher.getNodeCount();
                 while (onDemandFetcher.getNodeCount() > 0) {
                     int j2 = k - onDemandFetcher.getNodeCount();
@@ -8223,41 +8220,9 @@ public class client extends RSApplet {
             drawMenu();
         if (anInt1055 == 1)
             multiOverlay.drawSprite(472, 296);
-        if (fpsOn) {
-            char c = '\u01FB';
-            int k = 20;
-            int i1 = 0xffff00;
-            if (super.fps < 15)
-                i1 = 0xff0000;
-            aTextDrawingArea_1271.method380("Fps:" + super.fps, c, i1, k);
-            k += 15;
-            Runtime runtime = Runtime.getRuntime();
-            int j1 = (int) ((runtime.totalMemory() - runtime.freeMemory()) / 1024L);
-            i1 = 0xffff00;
-            if (j1 > 0x2000000 && lowMem)
-                i1 = 0xff0000;
-            aTextDrawingArea_1271.method380("Mem:" + j1 + "k", c, 0xffff00, k);
-            k += 15;
-        }
-        int i1 = 0xffff00;
         int x = baseX + (myPlayer.x - 6 >> 7);
         int y = baseY + (myPlayer.y - 6 >> 7);
-        if (clientData) {
-            char c = '\u01FB';
-            int k = 20;
-            if (super.fps < 15)
-                i1 = 0xff0000;
-            aTextDrawingArea_1271.method385(0xffff00, "Fps: " + super.fps, 285, 5);
-            Runtime runtime = Runtime.getRuntime();
-            int j1 = (int) ((runtime.totalMemory() - runtime.freeMemory()) / 1024L);
-            i1 = 0xffff00;
-            if (j1 > 0x2000000 && lowMem)
-                i1 = 0xff0000;
-            k += 15;
-            aTextDrawingArea_1271.method385(0xffff00, "Mem: " + j1 + "k", 299, 5);
-            aTextDrawingArea_1271.method385(0xffff00, "Mouse X: " + super.mouseX + " , Mouse Y: " + super.mouseY, 314, 5);
-            aTextDrawingArea_1271.method385(0xffff00, "Coords: " + x + ", " + y, 329, 5);
-        }
+        drawDebugOn3dScreen(x, y);
         if (anInt1104 != 0) {
             int j = anInt1104 / 50;
             int l = j / 60;
@@ -8271,6 +8236,23 @@ public class client extends RSApplet {
                 anInt849 = 0;
                 stream.createFrame(148);
             }
+        }
+    }
+
+    private void drawDebugOn3dScreen(int x, int y) {
+        if (clientData) {
+            aTextDrawingArea_1271.method385(0xffff00, "Fps: " + super.fps, 269, 5);
+            Runtime runtime = Runtime.getRuntime();
+            int j1 = (int) ((runtime.totalMemory() - runtime.freeMemory()) / 1024L);
+            int rx = x >> 6;
+            int ry = y >> 6;
+            int regionId = rx * 256 + ry;
+            int floorId = onDemandFetcher.getMapID(0, ry, rx);
+            int objectId = onDemandFetcher.getMapID(1, ry, rx);
+            aTextDrawingArea_1271.method385(0xffff00, "Mem: " + j1 + "k", 284, 5);
+            aTextDrawingArea_1271.method385(0xffff00, "Mouse X: " + super.mouseX + " , Mouse Y: " + super.mouseY, 299, 5);
+            aTextDrawingArea_1271.method385(0xffff00, "Coords(" + x + "," + y+")", 314, 5);
+            aTextDrawingArea_1271.method385(0xffff00, "Map(" + regionId + " FloorID " + floorId+" Object ID " + objectId + ")", 329, 5);
         }
     }
 
@@ -9854,79 +9836,10 @@ public class client extends RSApplet {
             needDrawTabArea = true;
     }
 
-    public void sendPacket185(int button, int toggle, int type) {
-        switch (type) {
-            case 135:
-                RSInterface class9 = RSInterface.interfaceCache[button];
-                boolean flag8 = true;
-                if (class9.contentType > 0)
-                    flag8 = promptUserForInput(class9);
-                if (flag8) {
-                    stream.createFrame(185);
-                    stream.writeWord(button);
-                }
-                break;
-            case 646:
-                stream.createFrame(185);
-                stream.writeWord(button);
-                RSInterface class9_2 = RSInterface.interfaceCache[button];
-                if (class9_2.valueIndexArray != null && class9_2.valueIndexArray[0][0] == 5) {
-                    if (variousSettings[toggle] != class9_2.anIntArray212[0]) {
-                        variousSettings[toggle] = class9_2.anIntArray212[0];
-                        method33(toggle);
-                        needDrawTabArea = true;
-                    }
-                }
-                break;
-            case 169:
-                stream.createFrame(185);
-                stream.writeWord(button);
-                RSInterface class9_3 = RSInterface.interfaceCache[button];
-                if (class9_3.valueIndexArray != null && class9_3.valueIndexArray[0][0] == 5) {
-                    variousSettings[toggle] = 1 - variousSettings[toggle];
-                    method33(toggle);
-                    needDrawTabArea = true;
-                }
-                switch (button) {
-                    case 19136:
-                        System.out.println("toggle = " + toggle);
-                        if (toggle == 0)
-                            sendFrame36(173, toggle);
-                        if (toggle == 1)
-                            sendPacket185(153, 173, 646);
-                        break;
-                }
-                break;
-        }
-    }
-
-    public void sendFrame36(int id, int state) {
-        anIntArray1045[id] = state;
-        if (variousSettings[id] != state) {
-            variousSettings[id] = state;
-            method33(id);
-            needDrawTabArea = true;
-            if (dialogID != -1)
-                inputTaken = true;
-        }
-    }
-
-    public void sendFrame219() {
-        if (invOverlayInterfaceID != -1) {
-            invOverlayInterfaceID = -1;
-            needDrawTabArea = true;
-            tabAreaAltered = true;
-        }
-        if (backDialogID != -1) {
-            backDialogID = -1;
-            inputTaken = true;
-        }
-        if (inputDialogState != 0) {
-            inputDialogState = 0;
-            inputTaken = true;
-        }
-        openInterfaceID = -1;
-        aBoolean1149 = false;
+    private void sendButtonClick(RSInterface widget){
+        stream.createFrame(185);
+        stream.writeWord(widget.parentID);
+        stream.writeWord(widget.getChildIndexId());
     }
 
     public void sendFrame248(int interfaceID, int sideInterfaceID) {
@@ -10227,10 +10140,10 @@ public class client extends RSApplet {
                                     objectIndices[k16] = -1;
                                     k16++;
                                 } else {
-                                    int k28 = terrianIndices[k16] = onDemandFetcher.method562(0, j26, l23);
+                                    int k28 = terrianIndices[k16] = onDemandFetcher.getMapID(0, j26, l23);
                                     if (k28 != -1)
                                         onDemandFetcher.method558(3, k28);
-                                    int j30 = objectIndices[k16] = onDemandFetcher.method562(1, j26, l23);
+                                    int j30 = objectIndices[k16] = onDemandFetcher.getMapID(1, j26, l23);
                                     if (j30 != -1)
                                         onDemandFetcher.method558(3, j30);
                                     k16++;
@@ -10270,10 +10183,10 @@ public class client extends RSApplet {
                             int i29 = regionIds[l26] = ai[l26];
                             int l30 = i29 >> 8 & 0xff;
                             int l31 = i29 & 0xff;
-                            int j32 = terrianIndices[l26] = onDemandFetcher.method562(0, l31, l30);
+                            int j32 = terrianIndices[l26] = onDemandFetcher.getMapID(0, l31, l30);
                             if (j32 != -1)
                                 onDemandFetcher.method558(3, j32);
-                            int i33 = objectIndices[l26] = onDemandFetcher.method562(1, l31, l30);
+                            int i33 = objectIndices[l26] = onDemandFetcher.getMapID(1, l31, l30);
                             if (i33 != -1)
                                 onDemandFetcher.method558(3, i33);
                         }

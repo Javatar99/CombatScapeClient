@@ -255,19 +255,8 @@ public final class OnDemandFetcher extends OnDemandFetcherParent
             else
                 modelIndices[k1] = 0;
 
-        abyte2 = streamLoader.getDataForName("map_index");
-        Stream stream2 = new Stream(abyte2);
-        j1 = abyte2.length / 7;
-        mapIndices1 = new int[j1];
-        mapIndices2 = new int[j1];
-        mapIndices3 = new int[j1];
-        mapIndices4 = new int[j1];
-        for (int i2 = 0; i2 < j1; i2++) {
-            mapIndices1[i2] = stream2.readUnsignedWord();
-            mapIndices2[i2] = stream2.readUnsignedWord();
-            mapIndices3[i2] = stream2.readUnsignedWord();
-            mapIndices4[i2] = stream2.readUnsignedByte();
-        }
+        loadMapIndex(streamLoader);
+        Stream stream2;
 
         abyte2 = streamLoader.getDataForName("anim_index");
         stream2 = new Stream(abyte2);
@@ -290,6 +279,25 @@ public final class OnDemandFetcher extends OnDemandFetcherParent
         writeVersionList(0);
     }
 
+    private void loadMapIndex(StreamLoader streamLoader) {
+        byte[] abyte2;
+        int j1;
+        abyte2 = streamLoader.getDataForName("map_index");
+        Stream stream2 = new Stream(abyte2);
+        j1 = abyte2.length / 7;
+        regionHash = new int[j1];
+        floorIds = new int[j1];
+        objectIds = new int[j1];
+        membersArea = new int[j1];
+        for (int i2 = 0; i2 < j1; i2++) {
+            regionHash[i2] = stream2.readUnsignedWord();
+            floorIds[i2] = stream2.readUnsignedWord();
+            objectIds[i2] = stream2.readUnsignedWord();
+            membersArea[i2] = stream2.readUnsignedByte();
+        }
+        System.out.println("Loaded " + regionHash.length + " maps.");
+    }
+
 
     public int getNodeCount() {
         synchronized (nodeSubList) {
@@ -302,11 +310,11 @@ public final class OnDemandFetcher extends OnDemandFetcherParent
     }
 
     public void method554(boolean flag) {
-        int j = mapIndices1.length;
+        int j = regionHash.length;
         for (int k = 0; k < j; k++)
-            if (flag || mapIndices4[k] != 0) {
-                method563((byte) 2, 3, mapIndices3[k]);
-                method563((byte) 2, 3, mapIndices2[k]);
+            if (flag || membersArea[k] != 0) {
+                method563((byte) 2, 3, objectIds[k]);
+                method563((byte) 2, 3, floorIds[k]);
             }
     }
 
@@ -465,16 +473,16 @@ public final class OnDemandFetcher extends OnDemandFetcherParent
         }
     }
 
-    public void method560(int i, int j) {
+    public void requestFile(int dataID, int dataType) {
         if (clientInstance.decompressors[0] == null)
             return;
-        if (versions[j][i] == 0)
+        if (versions[dataType][dataID] == 0)
             return;
         if (anInt1332 == 0)
             return;
         OnDemandData onDemandData = new OnDemandData();
-        onDemandData.dataType = j;
-        onDemandData.ID = i;
+        onDemandData.dataType = dataType;
+        onDemandData.ID = dataID;
         onDemandData.incomplete = false;
         synchronized (aClass19_1344) {
             aClass19_1344.insertHead(onDemandData);
@@ -509,21 +517,20 @@ public final class OnDemandFetcher extends OnDemandFetcherParent
         }
         onDemandData.buffer = new byte[i];
         System.arraycopy(gzipInputBuffer, 0, onDemandData.buffer, 0, i);
-
         return onDemandData;
     }
 
-    public int method562(int i, int k, int l) {
-        int i1 = (l << 8) + k;
+    public int getMapID(int mapType, int regionY, int regionX) {
+        int regionHash = (regionX << 8) + regionY;
         int mapNigga2;
         int mapNigga3;
-        for (int j1 = 0; j1 < mapIndices1.length; j1++) {
-            if (mapIndices1[j1] == i1) {
-                if (i == 0) {
-                    mapNigga2 = mapIndices2[j1] > 3535 ? -1 : mapIndices2[j1];
+        for (int j1 = 0; j1 < this.regionHash.length; j1++) {
+            if (this.regionHash[j1] == regionHash) {
+                if (mapType == 0) {
+                    mapNigga2 = floorIds[j1] > 3535 ? -1 : floorIds[j1];
                     return mapNigga2;
                 } else {
-                    mapNigga3 = mapIndices3[j1] > 3535 ? -1 : mapIndices3[j1];
+                    mapNigga3 = objectIds[j1] > 3535 ? -1 : objectIds[j1];
                     return mapNigga3;
                 }
             }
@@ -550,9 +557,9 @@ public final class OnDemandFetcher extends OnDemandFetcherParent
         }
     }
 
-    public boolean method564(int i) {
-        for (int k = 0; k < mapIndices1.length; k++)
-            if (mapIndices3[k] == i)
+    public boolean isObjectMap(int i) {
+        for (int k = 0; k < regionHash.length; k++)
+            if (objectIds[k] == i)
                 return true;
         return false;
     }
@@ -693,7 +700,7 @@ public final class OnDemandFetcher extends OnDemandFetcherParent
     public String statusString;
     private int writeLoopCycle;
     private long openSocketTime;
-    private int[] mapIndices3;
+    private int[] objectIds;
     private final CRC32 crc32;
     private final byte[] ioBuffer;
     public int onDemandCycle;
@@ -704,11 +711,11 @@ public final class OnDemandFetcher extends OnDemandFetcherParent
     private int expectedSize;
     private int[] anIntArray1348;
     public int anInt1349;
-    private int[] mapIndices2;
+    private int[] floorIds;
     private int filesLoaded;
     private boolean running;
     private OutputStream outputStream;
-    private int[] mapIndices4;
+    private int[] membersArea;
     private boolean waiting;
     private final NodeList aClass19_1358;
     private final byte[] gzipInputBuffer;
@@ -722,7 +729,7 @@ public final class OnDemandFetcher extends OnDemandFetcherParent
     private final NodeList aClass19_1368;
     private OnDemandData current;
     private final NodeList aClass19_1370;
-    private int[] mapIndices1;
+    private int[] regionHash;
     private byte[] modelIndices;
     private int loopCycle;
 }

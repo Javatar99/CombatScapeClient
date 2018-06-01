@@ -61,7 +61,7 @@ public final class ObjectDef {
         if (anIntArray773 == null)
             return;
         for (int j = 0; j < anIntArray773.length; j++)
-            class42_sub1.method560(anIntArray773[j] & 0xffff, 0);
+            class42_sub1.requestFile(anIntArray773[j] & 0xffff, 0);
     }
 
     public static void nullLoader() {

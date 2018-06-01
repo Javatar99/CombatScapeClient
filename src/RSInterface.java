@@ -70,7 +70,12 @@ public final class RSInterface {
     public int childY[];
     private int anInt255;
     private int anInt256;
+    private int childIndexId;
     public RSInterface() {
+    }
+
+    public int getChildIndexId() {
+        return childIndexId;
     }
 
     public static void unpack(StreamLoader streamLoader, TextDrawingArea textDrawingAreas[], StreamLoader streamLoader_1) {
@@ -273,6 +278,15 @@ public final class RSInterface {
                 }
             }
         }
+
+        for (RSInterface anInterfaceCache : interfaceCache) {
+            if (anInterfaceCache != null && anInterfaceCache.type == 0) {
+                for (int l = 0; l < anInterfaceCache.children.length; l++) {
+                    interfaceCache[anInterfaceCache.children[l]].childIndexId = l;
+                }
+            }
+        }
+
         aClass44 = streamLoader;
         aMRUNodes_238 = null;
     }
